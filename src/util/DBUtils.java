@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DBConnection {
+public class DBUtils {
 
     private static Properties properties = new Properties();
     private static String filePath = "src/resources/jdbc.properties";

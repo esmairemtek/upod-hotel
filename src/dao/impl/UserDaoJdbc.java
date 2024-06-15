@@ -22,14 +22,14 @@ public class UserDaoJdbc implements UserDao {
         return conn;
     }
     private static final String SAVE_QUERY = "INSERT INTO USER VALUES (?, ?, ?, ?, ?)";
-    private static final String UPDATE_QUERY = "UPDATE USER SET EMAIL = ? WHERE ID = ?";
+    private static final String UPDATE_QUERY = "UPDATE USER SET EMAIL = ? WHERE ID = ?"; // update email
     private static final String DELETE_QUERY = "DELETE FROM USER WHERE ID = ?";
     private static final String RETRIEVE_QUERY = "SELECT * FROM USER WHERE ID = ?";
     private static final String RETRIEVE_ALL_QUERY = "SELECT * FROM USER";
 
     @Override
     public void save(User user) throws DaoException, NoSuchAlgorithmException {
-        try (Connection conn = DBUtils.getConnection();
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(SAVE_QUERY)) {
             conn.setAutoCommit(false);
             pstmt.setInt(1, user.getId());
@@ -49,7 +49,7 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public void update(User user) throws DaoException {
-        try (Connection conn = DBUtils.getConnection();
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(UPDATE_QUERY)) {
             conn.setAutoCommit(false);
             pstmt.setString(1, user.getEmail());
@@ -74,7 +74,7 @@ public class UserDaoJdbc implements UserDao {
     public User findById(Integer id) throws NoSuchUserException, DaoException {
         User user = null;
 
-        try (Connection conn = DBUtils.getConnection();
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(RETRIEVE_QUERY)) {
             pstmt.setInt(1, id);
             ResultSet resultSet = pstmt.executeQuery();
@@ -105,7 +105,7 @@ public class UserDaoJdbc implements UserDao {
     public List<User> findByUserType(String userType) throws DaoException {
         List<User> users = new ArrayList<>();
 
-        try (Connection conn = DBUtils.getConnection();
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(RETRIEVE_ALL_QUERY)) {
             ResultSet resultSet = pstmt.executeQuery();
 

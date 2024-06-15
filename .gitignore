@@ -30,3 +30,5 @@ bin/
 /.idea/
 /lib/
 /upod-hotel.iml
+/JDBC.log
+src/resources/jdbc.properties

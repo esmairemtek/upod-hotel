@@ -260,9 +260,4 @@ public class DBInitializer {
             System.out.println("Error executing batch insert: " + e.getMessage());
         }
     }
-
-    public static void main(String[] args) {
-        DBInitializer dbInitializer = new DBInitializer();
-        dbInitializer.initializeTables();
-    }
 }

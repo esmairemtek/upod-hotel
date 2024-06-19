@@ -12,9 +12,13 @@ public interface UserDao extends AutoCloseable {
 
     void update(User user) throws DaoException;
 
-    void deleteById(Integer id);
+    boolean deleteById(Integer id) throws DaoException;
 
     User findById(Integer id) throws NoSuchUserException, DaoException;
+
+    User findByEmail(String email) throws NoSuchUserException, DaoException;
+
+    User findByAuth(String email, String password) throws NoSuchAlgorithmException, DaoException;
 
     List<User> findByUserType(String userType) throws DaoException;
 }

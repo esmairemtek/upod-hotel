@@ -6,4 +6,8 @@ public class NoSuchUserException extends Exception {
     public NoSuchUserException(int id) {
         super(MESSAGE + id);
     }
+
+    public NoSuchUserException(String email) {
+        super(MESSAGE + email);
+    }
 }

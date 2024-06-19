@@ -22,4 +22,13 @@ public class Invoice {
     public float getTotalCost() {
         return totalCost;
     }
+
+    @Override
+    public String toString() {
+        return "Invoice{" +
+                "invoiceId=" + invoiceId +
+                ", reservationId=" + reservationId +
+                ", totalCost=" + totalCost +
+                '}';
+    }
 }

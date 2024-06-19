@@ -32,6 +32,17 @@ public class Room {
     public void setFeatures(List<Feature> features) {
         this.features = features;
     }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", capacity=" + capacity +
+                ", price=" + price +
+                ", features=" + features +
+                '}';
+    }
 }
 
 

@@ -18,4 +18,13 @@ public class Service {
     public float getPrice() {
         return price;
     }
+
+    @Override
+    public String toString() {
+        return "Service{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

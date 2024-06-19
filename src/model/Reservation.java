@@ -55,4 +55,18 @@ public class Reservation {
     public List<Service> getServices() {
         return services;
     }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "reservationId=" + reservationId +
+                ", roomId=" + roomId +
+                ", customers=" + customers +
+                ", checkInDate=" + checkInDate +
+                ", checkOutDate=" + checkOutDate +
+                ", checkedInDate=" + checkedInDate +
+                ", checkedOutDate=" + checkedOutDate +
+                ", services=" + services +
+                '}';
+    }
 }

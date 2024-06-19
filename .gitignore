@@ -32,3 +32,4 @@ bin/
 /upod-hotel.iml
 /JDBC.log
 src/resources/jdbc.properties
+/src/resources/data.properties

@@ -1,11 +1,33 @@
 package util;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
+
 
 public class DBInitializer {
+    private static final Properties properties = new Properties();
+
+    static {
+        FileReader in = null;
+        String filePath = "src/resources/data.properties";
+        try {
+            in = new FileReader(filePath);
+        } catch (FileNotFoundException e) {
+            System.out.println("File is not found: " + filePath);
+        }
+        try {
+            properties.load(in);
+        } catch (IOException e) {
+            System.out.println("Problem with IO: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     public void initializeTables() {
         createUserTable();
@@ -36,9 +58,9 @@ public class DBInitializer {
 
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, "Lilith Iyapo");
-            pstmt.setString(2, "admin@upodhotel.com");
-            pstmt.setString(3, SecurityUtils.hashPassword("Admin123"));
+            pstmt.setString(1, properties.getProperty("managerName"));
+            pstmt.setString(2, properties.getProperty("managerMail"));
+            pstmt.setString(3, SecurityUtils.hashPassword(properties.getProperty("managerPassword")));
             pstmt.setString(4, "manager");
 
             int affectedRows = pstmt.executeUpdate();

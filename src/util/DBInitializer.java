@@ -84,17 +84,54 @@ public class DBInitializer {
                 ");";
 
         executeUpdate(sql, "Service table created successfully.");
+        insertInitialServices();
+    }
+
+    private void insertInitialServices() {
+        String sql = "INSERT INTO Service (name, price) VALUES (?, ?)";
+        String[][] services = {
+                {"Spa", "100.00"},
+                {"In-Room Dining", "30.00"},
+                {"Fitness Center", "25.00"},
+                {"Pool Access", "15.00"},
+                {"Airport Shuttle", "50.00"},
+                {"Valet Parking", "20.00"},
+                {"Laundry Service", "20.00"},
+                {"Buffet Breakfast", "20.00"}
+        };
+        executeBatchInsert(sql, services);
     }
 
     private void createRoomTable() {
         String sql = "CREATE TABLE Room (" +
                 "id INT AUTO_INCREMENT PRIMARY KEY," +
-                "name VARCHAR(255) NOT NULL," +
+                "name VARCHAR(255) NOT NULL UNIQUE," +
                 "capacity INT NOT NULL," +
                 "price DECIMAL(10,2)" +
                 ");";
 
         executeUpdate(sql, "Room table created successfully.");
+        insertInitialRooms();
+    }
+
+    private void insertInitialRooms() {
+        String sql = "INSERT INTO Room (name, capacity, price) VALUES (?,?,?)";
+        String[][] rooms = {
+                {"Single Eco 1", "1", "75.00"},
+                {"Single Eco 2", "1", "75.00"},
+                {"Double Eco 1", "2", "120.00"},
+                {"Double Eco 2", "2", "120.00"},
+                {"Double Eco 3", "2", "120.00"},
+                {"Double Deluxe 1", "2", "150.00"},
+                {"Double Deluxe 2", "2", "150.00"},
+                {"Triple Eco 1", "3", "165.00"},
+                {"Triple Eco 2", "3", "165.00"},
+                {"Triple Eco 3", "3", "165.00"},
+                {"Triple Deluxe 1", "3", "180.00"},
+                {"Triple Deluxe 2", "3", "180.00"},
+                {"Family Suite", "4", "200.00"}
+        };
+        executeBatchInsert(sql, rooms);
     }
 
     private void createReservationTable() {
@@ -164,10 +201,28 @@ public class DBInitializer {
 
     private void insertInitialRoomFeatureLinks() {
         String sql = "INSERT INTO Room_Feature_Links (room_id, feature_id) VALUES (?, ?)";
-        String[][] roomFeatures = {
-
+        String[][] roomFeatureLinks = {
+                {"1", "2"},  // Single Eco 1 with Safe Deposit
+                {"2", "2"},  // Single Eco 2 with Safe Deposit
+                {"3", "3"},  // Double Eco 1 with Sea View
+                {"4", "3"},  // Double Eco 2 with Sea View
+                {"5", "4"},  // Double Eco 3 with Forest View
+                {"6", "1"},  // Double Deluxe 1 with Jacuzzi
+                {"6", "6"},  // Double Deluxe 1 with Minibar
+                {"7", "1"},  // Double Deluxe 2 with Jacuzzi
+                {"7", "6"},  // Double Deluxe 2 with Minibar
+                {"8", "5"},  // Triple Eco 1 with Balcony
+                {"9", "5"},  // Triple Eco 2 with Balcony
+                {"10", "5"}, // Triple Eco 3 with Balcony
+                {"11", "1"}, // Triple Deluxe 1 with Jacuzzi
+                {"11", "6"}, // Triple Deluxe 1 with Minibar
+                {"12", "1"}, // Triple Deluxe 2 with Jacuzzi
+                {"12", "6"}, // Triple Deluxe 2 with Minibar
+                {"13", "1"}, // Family Suite with Jacuzzi
+                {"13", "6"}, // Family Suite with Minibar
+                {"13", "5"}  // Family Suite with Balcony
         };
-        executeBatchInsert(sql, roomFeatures);
+        executeBatchInsert(sql, roomFeatureLinks);
     }
 
     private void createReservationServiceLinksTable() {
